@@ -54,16 +54,13 @@ class RosPackage:
         root = tree.getroot()
         build_dep_num = 0
         exec_dep_num = 0
-        print(len(root))
         for i in range(len(root)):
             for child in self.pkg_xml:
                 if root[i].tag == child.tag:
-                    print(root[i].tag)
                     root[i].text = child.text
                     root[i].attrib = child.attrib
             if root[i].tag == 'build_depend':
                 build_dep_num = i + 1
-                print(build_dep_num)
             if root[i].tag == 'exec_depend':
                 exec_dep_num = i + 1 + len(self.depend)
         for depend in self.depend:
