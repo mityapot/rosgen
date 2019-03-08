@@ -10,8 +10,8 @@
     <depend>tf</depend>
     <node>
         <name>motor_driver_node</name>
-        <depend type="Twist">nav_msgs</depend>
-        <depend type="Odometry">geometry_msgs</depend>
+        <depend type="Odometry">nav_msgs</depend>
+        <depend type="Twist">geometry_msgs</depend>
         <depend type="transform_broadcaster">tf</depend>
         <subscribers>
             <sub>
