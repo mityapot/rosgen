@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package>
+    <name>[0]</name>
+    <version>[1]</version>
+    <dir>[2]</dir>
+    <description>[3]</description>
+    <maintainer email="[5]">[4]</maintainer>
+    [6]
+    <node>
+        <name>[7]</name>
+        [8]
+        <subscribers>
+        <publishers>
+    </node>
+</package>

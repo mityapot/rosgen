@@ -1,13 +1,13 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>motor_driver</name>
-  <version>0.0.0</version>
-  <description>The motor_driver package</description>
+  <name>[0]</name>
+  <version>[1]</version>
+  <description>[2]</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag -->
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="alexey@todo.todo">alexey</maintainer>
+  [3]
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
@@ -50,8 +50,11 @@
   <!--   <doc_depend>doxygen</doc_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roscpp</build_depend>
+  [4]
   <build_export_depend>roscpp</build_export_depend>
   <exec_depend>roscpp</exec_depend>
+  [5]
+
 
   <!-- The export tag contains other, unspecified, tags -->
   <export>
