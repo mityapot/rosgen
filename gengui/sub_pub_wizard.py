@@ -40,6 +40,24 @@ class ManagerGui(QMainWindow):
         self.setWindowTitle('Менеджер подписчиков и издателей')
         self.setWindowModality(Qt.ApplicationModal)
 
+    def manager_close(self):
+        """
+        Function close manager window
+
+        """
+
+        if self.wid.check_last_row() and self.wid.changed is True:
+            but = QMessageBox().question(self, 'Message', "Вы точно хотите выйти и не применять изменения?",
+                                             QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+            if but == QMessageBox.Yes:
+                self.hide()
+                self.statusbar.showMessage('Ожидание данных')
+                self.wid.reload_table()
+        elif self.wid.check_last_row() is False and self.wid.changed is True:
+            pass
+        else:
+            self.hide()
+
     def keyPressEvent(self, e):
         """
         Function catch hot key press events
@@ -48,17 +66,20 @@ class ManagerGui(QMainWindow):
         """
 
         if e.key() == Qt.Key_Escape:
-            if self.wid.check_last_row():
-                if self.wid.changed is True:
-                    but = QMessageBox().question(self, 'Message', "Вы точно хотите выйти и не применять изменения?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
-                    if but == QMessageBox.Yes:
-                        self.hide()
-                        self.statusbar.showMessage('Ожидание данных')
-                        self.wid.reload_table()
-                else:
-                    self.hide()
+            self.manager_close()
         if e.key() == Qt.Key_Enter:
             print('Enter')
+
+    def closeEvent(self, QCloseEvent):
+        """
+        Function catch close manager event
+        :param QCloseEvent: close event
+        :type QCloseEvent: QCloseEvent
+        """
+
+        QCloseEvent.ignore()
+        self.manager_close()
+
 
 
 class PSWizard(QWidget):
@@ -68,7 +89,6 @@ class PSWizard(QWidget):
 
     msg2Statusbar = pyqtSignal(str)
     changed = False
-    validator = QIntValidator(0, 100)
 
     def __init__(self, sub_list=None, pub_list=None):
         """
@@ -153,6 +173,8 @@ class PSWizard(QWidget):
             ed_line.textEdited.connect(self.change_data)
             ed_line.setAlignment(Qt.AlignCenter)
             ed_line.setPlaceholderText(p_holder_list[column - 1])
+            if column == 4:
+                ed_line.setValidator(QIntValidator(1, 100))
             ed_line_row.append(ed_line)
             self.table.setCellWidget(rowPosition, column, ed_line)
         deleteButton = QPushButton("Удалить")
@@ -219,13 +241,12 @@ class PSWizard(QWidget):
         :param row: position row which validate
         :type row: int
         """
-
-        resp = self.validator.validate(self.table.cellWidget(row, self.table.columnCount() - 2).text(), 0)
-        if resp[0] != 2:
+        if self.table.cellWidget(row, 4).hasAcceptableInput():
+            return True
+        else:
             self.msg2Statusbar.emit(
-                'Вы ввели неправильное значение размера очереди. Оно должно быть целым положительным числом!')
+                    'Вы ввели неправильное значение размера очереди. Оно должно быть целым положительным числом > 0!')
             return False
-        return True
 
     def check_last_row(self):
         """

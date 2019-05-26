@@ -4,11 +4,13 @@ import sys
 import os
 from PyQt5.QtWidgets import (QWidget, QMainWindow, QLabel, QLineEdit,
     QTextEdit, QGridLayout, QApplication, QPushButton,  QAction, qApp, QFileDialog, QMessageBox, QMenu)
-from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import pyqtSignal, QRegExp
+from PyQt5.QtGui import QIcon, QRegExpValidator
 import xml.etree.cElementTree as ET
 from genkernel import package
 from gengui.sub_pub_wizard import ManagerGui
 import shutil
+import json
 
 
 class GenGui(QMainWindow):
@@ -38,10 +40,8 @@ class GenGui(QMainWindow):
         editMenu = menubar.addMenu('&Редактирование')
         self.create_menu_par('Менеджер подписчиков и издателей', self.wid.show_manager, fileMenu, 'Ctrl+M')
         self.create_menu_par('Очистить', self.wid.clear_all_lines, editMenu, 'Ctrl+D')
-        loadMenu = fileMenu.addMenu('Загрузить данные из')
-        self.create_menu_par('XML', self.wid.open_xmlDialog, loadMenu, 'Ctrl+F')
-        saveMenu = fileMenu.addMenu('Сохранить как')
-        self.create_menu_par('XML', self.wid.save_xmlDialog, saveMenu, 'Ctrl+S')
+        self.create_menu_par('Загрузить данные из...', self.wid.open_fileDialog, fileMenu, 'Ctrl+F')
+        self.create_menu_par('Сохранить как...', self.wid.save_fileDialog, fileMenu, 'Ctrl+S')
         self.create_menu_par('Выход', self.exit_app, fileMenu, 'Esc')
         self.statusbar = self.statusBar()
         self.statusbar.showMessage('Ожидание данных')
@@ -81,6 +81,9 @@ class GenGui(QMainWindow):
         else:
             qApp.quit()
 
+    def closeEvent(self, QCloseEvent):
+        self.exit_app()
+
 
 class RosGenWidget(QWidget):
     """
@@ -115,6 +118,10 @@ class RosGenWidget(QWidget):
             labels.append(QLabel(name))
         for i, ph in zip(range(len(labels)),  param_list):
             ed_line = QLineEdit()
+            if i == 1:
+                ed_line.setValidator(QRegExpValidator(QRegExp("^([0-9]\.)*[0-9]$")))
+            elif i == 5:
+                ed_line.setValidator(QRegExpValidator(QRegExp("^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$")))
             ed_line.setPlaceholderText(ph)
             ed_line.textEdited.connect(self.change_data)
             self.full_ed_lines.append(ed_line)
@@ -126,7 +133,8 @@ class RosGenWidget(QWidget):
                  grid.addWidget(labels[i - 1], i, j)
                 else:
                     grid.addWidget(self.full_ed_lines[i - 1], i, j)
-        ch_dirButton = QPushButton("...")
+        ch_dirButton = QPushButton(self)
+        ch_dirButton.setIcon(QIcon('./icons/open_folder.png'))
         ch_dirButton.clicked.connect(self.ch_dirDialog)
         grid.addWidget(ch_dirButton, 3, 3)
         genButton = QPushButton("Сгенерировать")
@@ -138,7 +146,7 @@ class RosGenWidget(QWidget):
 
     def data_from_xml(self, xml_file):
         """
-        Function export data from xml file
+        Function import data from xml file
         :param xml_file: path to source xml
         :type xml_file: str
         """
@@ -195,6 +203,38 @@ class RosGenWidget(QWidget):
         self.manager.wid.reload_table()
         self.changed = False
         self.msg2Statusbar.emit('Выполнена выгрузка данных из XML')
+
+    def data_from_json(self, json_file):
+        """
+        Function import data from json file
+        :param json_file: path to source json
+        :type json_file: str
+        """
+
+        param_list = ['name', 'version', 'dir', 'description']
+        push_param = list()
+        dep_str = ''
+        dep_node_str = ''
+        with open(json_file) as f:
+            param_dict = json.load(f)
+        for i in range(len(param_list)):
+            push_param.append(param_dict[param_list[i]])
+        push_param.append(param_dict['maintainer']['name'])
+        push_param.append(param_dict['maintainer']['email'])
+        for dep in param_dict['depend']:
+            dep_str = dep_str + dep + ', '
+        push_param.append(dep_str)
+        push_param.append(param_dict['node']['name'])
+        for dep_node in param_dict['node']['depend']:
+            dep_node_str = dep_node_str + dep_node['name'] + '/' + dep_node['type'] + ', '
+        push_param.append(dep_node_str)
+        for line, val in zip(self.full_ed_lines, push_param):
+            line.setText(val)
+        self.manager.wid.pub_list = param_dict['node']['publishers']
+        self.manager.wid.sub_list = param_dict['node']['subscribers']
+        self.manager.wid.reload_table()
+        self.changed = False
+        self.msg2Statusbar.emit('Выполнена выгрузка данных из JSON')
 
     def create_gen_xml(self, out_file):
         """
@@ -268,6 +308,17 @@ class RosGenWidget(QWidget):
         f.close()
         self.changed = False
 
+    def create_gen_json(self, out_file):
+        """
+        Function export data from json file
+        :param out_file: path to output json file
+        :type out_file: str
+        """
+
+        params = self.create_package_dict()
+        with open(out_file, 'w') as fp:
+            json.dump(params, fp)
+
     def check_data(self):
         """
         Function check data in line edit input
@@ -275,9 +326,16 @@ class RosGenWidget(QWidget):
         :rtype: bool
         """
 
-        for line in self.full_ed_lines:
-            if line.text() != "":
-                continue
+        for i in range(len(self.full_ed_lines)):
+            if self.full_ed_lines[i].text() != "":
+                if self.full_ed_lines[i].hasAcceptableInput():
+                    continue
+                else:
+                    if i == 1:
+                        self.msg2Statusbar.emit('Неправильный формат версии! Исправьте и повторите действие!')
+                    elif i == 5:
+                        self.msg2Statusbar.emit('Неправильная почта! Исправьте и повторите действие!')
+                    return False
             else:
                 self.msg2Statusbar.emit('Не все поля заполнены! Исправьте и повторите действие!')
                 return False
@@ -349,19 +407,24 @@ class RosGenWidget(QWidget):
 
         self.manager.show()
 
-    def open_xmlDialog(self):
+    def open_fileDialog(self):
         """
         Function open dialog for import file
         """
 
         options = QFileDialog.Options()
         options |= QFileDialog.DontUseNativeDialog
-        fileName, _ = QFileDialog.getOpenFileName(self, "Открыть исходный XML", os.path.expanduser("~"),
-                                      "XML Файлы (*.xml)", options=options)
+        fileName, _ = QFileDialog.getOpenFileName(self, "Открыть исходный файл", os.path.expanduser("~"),
+                                      "XML Файлы (*.xml);;JSON Файлы (*.json)", options=options)
         if fileName:
-            self.data_from_xml(fileName)
+            file_format = fileName.split('.')[1]
+            if file_format == 'xml':
+                self.data_from_xml(fileName)
+            elif file_format == 'json':
+                self.data_from_json(fileName)
+            self.msg2Statusbar.emit('Импорт из файла {0}'.format(fileName))
 
-    def save_xmlDialog(self):
+    def save_fileDialog(self):
         """
         Function open dialog for save file
         """
@@ -369,9 +432,13 @@ class RosGenWidget(QWidget):
         if self.check_data():
             options = QFileDialog.Options()
             options |= QFileDialog.DontUseNativeDialog
-            fileName, _ = QFileDialog.getSaveFileName(self, "Сохранить как XML", os.path.expanduser("~"), "Все файлы (*);;XML Файлы (*.xml)", options=options)
+            fileName, _ = QFileDialog.getSaveFileName(self, "Сохранить как", os.path.expanduser("~"), "Все файлы (*);;XML Файлы (*.xml);;JSON Файлы (*.json)", options=options)
             if fileName:
-                self.create_gen_xml(fileName)
+                file_format = fileName.split('.')[1]
+                if file_format =='xml':
+                    self.create_gen_xml(fileName)
+                elif file_format =='json':
+                    self.create_gen_json(fileName)
                 self.msg2Statusbar.emit('Сохранено в файл: {0}'.format(fileName))
 
     def ch_dirDialog(self):
