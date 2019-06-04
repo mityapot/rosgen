@@ -3,7 +3,7 @@
 import sys
 import os
 from PyQt5.QtWidgets import (QWidget, QMainWindow, QLabel, QLineEdit,
-    QTextEdit, QGridLayout, QApplication, QPushButton,  QAction, qApp, QFileDialog, QMessageBox, QMenu)
+    QGridLayout, QApplication, QPushButton,  QAction, qApp, QFileDialog, QMessageBox, QMenu)
 from PyQt5.QtCore import pyqtSignal, QRegExp
 from PyQt5.QtGui import QIcon, QRegExpValidator
 import xml.etree.cElementTree as ET
@@ -287,28 +287,26 @@ class RosGenWidget(QWidget):
                 flag = 1
             elif line.find('<subscribers>') != -1:
                 o.write('\t\t<subscribers>\n')
-                if self.manager.wid.sub_list is not None:
-                    for sub in self.manager.wid.sub_list:
-                        o.write('\t\t\t<sub>\n')
-                        o.write('\t\t\t\t<name>{0}</name>\n'.format(sub['name']))
-                        o.write('\t\t\t\t<msg_type>{0}</msg_type>\n'.format(sub['msg_type']))
-                        o.write('\t\t\t\t<topic_name>{0}</topic_name>\n'.format(sub['topic_name']))
-                        o.write('\t\t\t\t<queue_size>{0}</queue_size>\n'.format(sub['queue_size']))
-                        o.write('\t\t\t</sub>\n')
-                    o.write('\t\t</subscribers>\n')
-                    flag = 1
+                for sub in self.manager.wid.sub_list:
+                    o.write('\t\t\t<sub>\n')
+                    o.write('\t\t\t\t<name>{0}</name>\n'.format(sub['name']))
+                    o.write('\t\t\t\t<msg_type>{0}</msg_type>\n'.format(sub['msg_type']))
+                    o.write('\t\t\t\t<topic_name>{0}</topic_name>\n'.format(sub['topic_name']))
+                    o.write('\t\t\t\t<queue_size>{0}</queue_size>\n'.format(sub['queue_size']))
+                    o.write('\t\t\t</sub>\n')
+                o.write('\t\t</subscribers>\n')
+                flag = 1
             elif line.find('<publishers>') != -1:
                 o.write('\t\t<publishers>\n')
-                if self.manager.wid.pub_list is not None:
-                    for pub in self.manager.wid.pub_list:
-                        o.write('\t\t\t<pub>\n')
-                        o.write('\t\t\t\t<name>{0}</name>\n'.format(pub['name']))
-                        o.write('\t\t\t\t<msg_type>{0}</msg_type>\n'.format(pub['msg_type']))
-                        o.write('\t\t\t\t<topic_name>{0}</topic_name>\n'.format(pub['topic_name']))
-                        o.write('\t\t\t\t<queue_size>{0}</queue_size>\n'.format(pub['queue_size']))
-                        o.write('\t\t\t</pub>\n')
-                    o.write('\t\t</publishers>\n')
-                    flag = 1
+                for pub in self.manager.wid.pub_list:
+                    o.write('\t\t\t<pub>\n')
+                    o.write('\t\t\t\t<name>{0}</name>\n'.format(pub['name']))
+                    o.write('\t\t\t\t<msg_type>{0}</msg_type>\n'.format(pub['msg_type']))
+                    o.write('\t\t\t\t<topic_name>{0}</topic_name>\n'.format(pub['topic_name']))
+                    o.write('\t\t\t\t<queue_size>{0}</queue_size>\n'.format(pub['queue_size']))
+                    o.write('\t\t\t</pub>\n')
+                o.write('\t\t</publishers>\n')
+                flag = 1
             if flag == 0:
                 o.write(line)
             else:

@@ -12,7 +12,7 @@ class ManagerGui(QMainWindow):
     ManagerGui class, window of manager of subscribers and publishers
     """
 
-    def __init__(self, sub_list=None, pub_list=None):
+    def __init__(self, sub_list=list(), pub_list=list()):
         """
         ManagerGui object constructor
         :param sub_list: list of subscribers parameters
@@ -90,7 +90,7 @@ class PSWizard(QWidget):
     msg2Statusbar = pyqtSignal(str)
     changed = False
 
-    def __init__(self, sub_list=None, pub_list=None):
+    def __init__(self, sub_list=list(), pub_list=list()):
         """
         PSWizard object constructor
         :param sub_list: list of subscribers parameters
@@ -214,14 +214,8 @@ class PSWizard(QWidget):
 
         param_list = ['name', 'msg_type', 'topic_name', 'queue_size']
         if self.check_last_row():
-            if self.pub_list is not None:
-                self.pub_list.clear()
-            else:
-                self.pub_list = list()
-            if self.sub_list is not None:
-                self.sub_list.clear()
-            else:
-                self.sub_list = list()
+            self.pub_list.clear()
+            self.sub_list.clear()
             for row in range(self.table.rowCount()):
                 row_dict = dict()
                 for line in range(1, self.table.columnCount() - 1):
@@ -278,18 +272,16 @@ class PSWizard(QWidget):
         for row in range(self.table.rowCount()):
             self.clear_row(row)
             self.table.removeRow(row)
-        if self.pub_list is not None:
-            for i in range(len(self.pub_list)):
-                ed_line_row, _ = self.add_row(i)
-                for j in range(len(ed_line_row)):
-                    ed_line_row[j].setText(self.pub_list[i][param_list[j]])
-            rows = i + 1
-        if self.sub_list is not None:
-            for i in range(len(self.sub_list)):
-                ed_line_row, combo = self.add_row(rows + i)
-                combo.setCurrentIndex(1)
-                for j in range(len(ed_line_row)):
-                    ed_line_row[j].setText(self.sub_list[i][param_list[j]])
+        for i in range(len(self.pub_list)):
+            ed_line_row, _ = self.add_row(i)
+            for j in range(len(ed_line_row)):
+                ed_line_row[j].setText(self.pub_list[i][param_list[j]])
+        rows = i + 1
+        for i in range(len(self.sub_list)):
+            ed_line_row, combo = self.add_row(rows + i)
+            combo.setCurrentIndex(1)
+            for j in range(len(ed_line_row)):
+                ed_line_row[j].setText(self.sub_list[i][param_list[j]])
         self.table.resizeColumnsToContents()
         self.changed = False
 

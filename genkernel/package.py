@@ -23,7 +23,7 @@ class RosPackage:
         self.make_dirs()
         self.make_xml()
         self.make_cmake()
-        self.pkg_dict['str_date'] = self.create_dt.strftime("%B %d, %Y")
+        self.pkg_dict['str_date'] = self.create_dt.strftime("%d-%m-%Y")
         self.node = RosNode(self.pkg_dict)
         out_topics = self.node.generate_node_code(self.dir_list[1])
         self.make_launch()
