@@ -12,9 +12,10 @@ class ManagerGui(QMainWindow):
     ManagerGui class, window of manager of subscribers and publishers
     """
 
-    def __init__(self, sub_list=list(), pub_list=list()):
+    def __init__(self, sub_list=None, pub_list=None):
         """
         ManagerGui object constructor
+
         :param sub_list: list of subscribers parameters
         :type sub_list: list
         :param pub_list: list of publishers parameters
@@ -22,6 +23,10 @@ class ManagerGui(QMainWindow):
         """
 
         super().__init__()
+        if pub_list is None:
+            pub_list = list()
+        if sub_list is None:
+            sub_list = list()
         self.sub_list = sub_list
         self.pub_list = pub_list
         self.initUI()
@@ -43,7 +48,6 @@ class ManagerGui(QMainWindow):
     def manager_close(self):
         """
         Function close manager window
-
         """
 
         if self.wid.check_last_row() and self.wid.changed is True:
@@ -61,6 +65,7 @@ class ManagerGui(QMainWindow):
     def keyPressEvent(self, e):
         """
         Function catch hot key press events
+
         :param e: key pressed event
         :type e: event object
         """
@@ -73,6 +78,7 @@ class ManagerGui(QMainWindow):
     def closeEvent(self, QCloseEvent):
         """
         Function catch close manager event
+
         :param QCloseEvent: close event
         :type QCloseEvent: QCloseEvent
         """
@@ -90,9 +96,10 @@ class PSWizard(QWidget):
     msg2Statusbar = pyqtSignal(str)
     changed = False
 
-    def __init__(self, sub_list=list(), pub_list=list()):
+    def __init__(self, sub_list=None, pub_list=None):
         """
         PSWizard object constructor
+
         :param sub_list: list of subscribers parameters
         :type sub_list: list
         :param pub_list: list of publishers parameters
@@ -100,6 +107,10 @@ class PSWizard(QWidget):
         """
 
         super().__init__()
+        if pub_list is None:
+            pub_list = list()
+        if sub_list is None:
+            sub_list = list()
         self.table = None
         self.sub_list = sub_list
         self.pub_list = pub_list
@@ -147,7 +158,9 @@ class PSWizard(QWidget):
     @pyqtSlot()
     def deleteClicked(self):
         """
-        Function delete row in table if button in row was pressed. Defined as slot.
+        Function delete row in table if button in row was pressed.
+
+        .. note:: This function defined as slot.
         """
 
         button = self.sender()
@@ -159,6 +172,7 @@ class PSWizard(QWidget):
     def add_row(self, rowPosition):
         """
         Function insert row in table
+
         :param rowPosition: position where row insert
         :type rowPosition: int
         :return: list of insert edit lines and combobox of row
@@ -191,6 +205,7 @@ class PSWizard(QWidget):
     def add_row_button(self):
         """
         Function insert row in table
+
         :return: 0 - sucsess  or -1 - error if previous row is not full
         :rtype: int
         """
@@ -232,6 +247,7 @@ class PSWizard(QWidget):
     def validate_row(self, row):
         """
         Function validate row data
+
         :param row: position row which validate
         :type row: int
         """
@@ -245,6 +261,7 @@ class PSWizard(QWidget):
     def check_last_row(self):
         """
         Function check data in last table row
+
         :return: correct data or not
         :rtype: bool
         """
@@ -288,6 +305,7 @@ class PSWizard(QWidget):
     def clear_row(self, row):
         """
         Function clear row data in table
+
         :param row: row which clear
         :type row: int
         """

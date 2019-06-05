@@ -14,6 +14,7 @@ class RosPackage:
     def __init__(self, pkg_dict):
         """
         RosPackage object constructor
+
         :param pkg_dict: package parameters in special format
         :type pkg_dict: dict
         """
@@ -116,6 +117,7 @@ class RosPackage:
     def make_readme(self, out_topics):
         """
         Function make file about ROS package - README.md
+
         :param out_topics: dict with strings in special format about subscribed and published topics
         :type out_topics: dict
         """

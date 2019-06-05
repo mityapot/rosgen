@@ -12,6 +12,7 @@ class RosNode:
     def __init__(self, pkg_dict):
         """
         RosNode object constructor
+
         :param pkg_dict: package parameters in special format
         :type pkg_dict: dict
         """
@@ -27,6 +28,7 @@ class RosNode:
     def generate_node_code(self, node_dir):
         """
         Function generate all source  C++ code of node
+
         :param node_dir: path to source node code
         :type: str
         :return: topics for readme in special format

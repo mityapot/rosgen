@@ -53,6 +53,7 @@ class GenGui(QMainWindow):
     def create_menu_par(self, name, trig_func, menu, shrt_cut):
         """
         Function create actions in menu
+
         :param name: name of action
         :type name: str
         :param trig_func: name of action function
@@ -150,6 +151,7 @@ class RosGenWidget(QWidget):
     def data_from_xml(self, xml_file):
         """
         Function import data from xml file
+
         :param xml_file: path to source xml
         :type xml_file: str
         """
@@ -210,6 +212,7 @@ class RosGenWidget(QWidget):
     def data_from_json(self, json_file):
         """
         Function import data from json file
+
         :param json_file: path to source json
         :type json_file: str
         """
@@ -242,6 +245,7 @@ class RosGenWidget(QWidget):
     def create_gen_xml(self, out_file):
         """
         Function export data from xml file
+
         :param out_file: path to output xml file
         :type out_file: str
         """
@@ -329,6 +333,7 @@ class RosGenWidget(QWidget):
     def check_data(self):
         """
         Function check data in line edit input
+
         :return: correct data or not
         :rtype: bool
         """
@@ -351,6 +356,7 @@ class RosGenWidget(QWidget):
     def create_package_dict(self):
         """
         Function create package parameters from line edit input
+
         :return: package parameters
         :rtype: dict
         """
