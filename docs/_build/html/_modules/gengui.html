@@ -1,0 +1,466 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>gengui package &#8212; RosGen 1.0.0 documentation</title>
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="gengui-package">
+<h1>gengui package<a class="headerlink" href="#gengui-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-gengui.m_window">
+<span id="gengui-m-window-module"></span><h2>gengui.m_window module<a class="headerlink" href="#module-gengui.m_window" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gengui.m_window.GenGui">
+<em class="property">class </em><code class="descclassname">gengui.m_window.</code><code class="descname">GenGui</code><a class="headerlink" href="#gengui.m_window.GenGui" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PyQt5.QtWidgets.QMainWindow</span></code></p>
+<p>GenGui class, main window of application</p>
+<dl class="method">
+<dt id="gengui.m_window.GenGui.closeEvent">
+<code class="descname">closeEvent</code><span class="sig-paren">(</span><em>self</em>, <em>QCloseEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.GenGui.closeEvent" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gengui.m_window.GenGui.create_menu_par">
+<code class="descname">create_menu_par</code><span class="sig-paren">(</span><em>name</em>, <em>trig_func</em>, <em>menu</em>, <em>shrt_cut</em><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.GenGui.create_menu_par" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function create actions in menu</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – name of action</p></li>
+<li><p><strong>trig_func</strong> (<em>function</em>) – name of action function</p></li>
+<li><p><strong>menu</strong> (<em>QMenu</em>) – menu object, menu in menubar</p></li>
+<li><p><strong>shrt_cut</strong> (<em>str</em>) – shortcut for action, optional</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.m_window.GenGui.exit_app">
+<code class="descname">exit_app</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.GenGui.exit_app" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function call when application quit</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.m_window.GenGui.initUI">
+<code class="descname">initUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.GenGui.initUI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function initialisation of main window interface</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gengui.m_window.GenGui.manager">
+<code class="descname">manager</code><em class="property"> = None</em><a class="headerlink" href="#gengui.m_window.GenGui.manager" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gengui.m_window.RosGenWidget">
+<em class="property">class </em><code class="descclassname">gengui.m_window.</code><code class="descname">RosGenWidget</code><a class="headerlink" href="#gengui.m_window.RosGenWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PyQt5.QtWidgets.QWidget</span></code></p>
+<p>RosGenWidget class, main working widget</p>
+<dl class="method">
+<dt id="gengui.m_window.RosGenWidget.ch_dirDialog">
+<code class="descname">ch_dirDialog</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.RosGenWidget.ch_dirDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function open dialog for choosing directory</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.m_window.RosGenWidget.change_data">
+<code class="descname">change_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.RosGenWidget.change_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function set flag if data changed</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.m_window.RosGenWidget.change_pkg_name">
+<code class="descname">change_pkg_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.RosGenWidget.change_pkg_name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function automation input for node name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gengui.m_window.RosGenWidget.changed">
+<code class="descname">changed</code><em class="property"> = False</em><a class="headerlink" href="#gengui.m_window.RosGenWidget.changed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gengui.m_window.RosGenWidget.check_data">
+<code class="descname">check_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.RosGenWidget.check_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function check data in line edit input</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>correct data or not</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.m_window.RosGenWidget.clear_all_lines">
+<code class="descname">clear_all_lines</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.RosGenWidget.clear_all_lines" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function clear all edit lines</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.m_window.RosGenWidget.create_gen_json">
+<code class="descname">create_gen_json</code><span class="sig-paren">(</span><em>out_file</em><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.RosGenWidget.create_gen_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function export data from json file
+:param out_file: path to output json file
+:type out_file: str</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.m_window.RosGenWidget.create_gen_xml">
+<code class="descname">create_gen_xml</code><span class="sig-paren">(</span><em>out_file</em><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.RosGenWidget.create_gen_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function export data from xml file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>out_file</strong> (<em>str</em>) – path to output xml file</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.m_window.RosGenWidget.create_package_dict">
+<code class="descname">create_package_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.RosGenWidget.create_package_dict" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function create package parameters from line edit input</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>package parameters</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.m_window.RosGenWidget.data_from_json">
+<code class="descname">data_from_json</code><span class="sig-paren">(</span><em>json_file</em><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.RosGenWidget.data_from_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function import data from json file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>json_file</strong> (<em>str</em>) – path to source json</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.m_window.RosGenWidget.data_from_xml">
+<code class="descname">data_from_xml</code><span class="sig-paren">(</span><em>xml_file</em><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.RosGenWidget.data_from_xml" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function import data from xml file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>xml_file</strong> (<em>str</em>) – path to source xml</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gengui.m_window.RosGenWidget.full_ed_lines">
+<code class="descname">full_ed_lines</code><em class="property"> = []</em><a class="headerlink" href="#gengui.m_window.RosGenWidget.full_ed_lines" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gengui.m_window.RosGenWidget.generate">
+<code class="descname">generate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.RosGenWidget.generate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function run generating ROS package</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.m_window.RosGenWidget.initUI">
+<code class="descname">initUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.RosGenWidget.initUI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function initialisation of widget interface</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gengui.m_window.RosGenWidget.msg2Statusbar">
+<code class="descname">msg2Statusbar</code><a class="headerlink" href="#gengui.m_window.RosGenWidget.msg2Statusbar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gengui.m_window.RosGenWidget.open_fileDialog">
+<code class="descname">open_fileDialog</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.RosGenWidget.open_fileDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function open dialog for import file</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gengui.m_window.RosGenWidget.pkg">
+<code class="descname">pkg</code><em class="property"> = None</em><a class="headerlink" href="#gengui.m_window.RosGenWidget.pkg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gengui.m_window.RosGenWidget.save_fileDialog">
+<code class="descname">save_fileDialog</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.RosGenWidget.save_fileDialog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function open dialog for save file</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.m_window.RosGenWidget.show_manager">
+<code class="descname">show_manager</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.m_window.RosGenWidget.show_manager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function show subscribers and publishers manager’s window</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gengui.sub_pub_wizard">
+<span id="gengui-sub-pub-wizard-module"></span><h2>gengui.sub_pub_wizard module<a class="headerlink" href="#module-gengui.sub_pub_wizard" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="gengui.sub_pub_wizard.ManagerGui">
+<em class="property">class </em><code class="descclassname">gengui.sub_pub_wizard.</code><code class="descname">ManagerGui</code><span class="sig-paren">(</span><em>sub_list=None</em>, <em>pub_list=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gengui.sub_pub_wizard.ManagerGui" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PyQt5.QtWidgets.QMainWindow</span></code></p>
+<p>ManagerGui class, window of manager of subscribers and publishers</p>
+<dl class="method">
+<dt id="gengui.sub_pub_wizard.ManagerGui.closeEvent">
+<code class="descname">closeEvent</code><span class="sig-paren">(</span><em>QCloseEvent</em><span class="sig-paren">)</span><a class="headerlink" href="#gengui.sub_pub_wizard.ManagerGui.closeEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function catch close manager event</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>QCloseEvent</strong> (<em>QCloseEvent</em>) – close event</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.sub_pub_wizard.ManagerGui.initUI">
+<code class="descname">initUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.sub_pub_wizard.ManagerGui.initUI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function initialisation of manager of subscribers and publishers</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.sub_pub_wizard.ManagerGui.keyPressEvent">
+<code class="descname">keyPressEvent</code><span class="sig-paren">(</span><em>e</em><span class="sig-paren">)</span><a class="headerlink" href="#gengui.sub_pub_wizard.ManagerGui.keyPressEvent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function catch hot key press events</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>e</strong> (<em>event object</em>) – key pressed event</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.sub_pub_wizard.ManagerGui.manager_close">
+<code class="descname">manager_close</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.sub_pub_wizard.ManagerGui.manager_close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function close manager window</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="gengui.sub_pub_wizard.PSWizard">
+<em class="property">class </em><code class="descclassname">gengui.sub_pub_wizard.</code><code class="descname">PSWizard</code><span class="sig-paren">(</span><em>sub_list=None</em>, <em>pub_list=None</em><span class="sig-paren">)</span><a class="headerlink" href="#gengui.sub_pub_wizard.PSWizard" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">PyQt5.QtWidgets.QWidget</span></code></p>
+<p>PSWizard class, widget provides view and edit all subscribers and publishers parameters</p>
+<dl class="method">
+<dt id="gengui.sub_pub_wizard.PSWizard.add_row">
+<code class="descname">add_row</code><span class="sig-paren">(</span><em>rowPosition</em><span class="sig-paren">)</span><a class="headerlink" href="#gengui.sub_pub_wizard.PSWizard.add_row" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function insert row in table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rowPosition</strong> (<em>int</em>) – position where row insert</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>list of insert edit lines and combobox of row</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>list, QComboBox</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.sub_pub_wizard.PSWizard.add_row_button">
+<code class="descname">add_row_button</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.sub_pub_wizard.PSWizard.add_row_button" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function insert row in table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>0 - sucsess  or -1 - error if previous row is not full</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.sub_pub_wizard.PSWizard.change_data">
+<code class="descname">change_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.sub_pub_wizard.PSWizard.change_data" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function set flag if data changed</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gengui.sub_pub_wizard.PSWizard.changed">
+<code class="descname">changed</code><em class="property"> = False</em><a class="headerlink" href="#gengui.sub_pub_wizard.PSWizard.changed" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gengui.sub_pub_wizard.PSWizard.check_last_row">
+<code class="descname">check_last_row</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.sub_pub_wizard.PSWizard.check_last_row" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function check data in last table row</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>correct data or not</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>bool</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.sub_pub_wizard.PSWizard.clear_row">
+<code class="descname">clear_row</code><span class="sig-paren">(</span><em>row</em><span class="sig-paren">)</span><a class="headerlink" href="#gengui.sub_pub_wizard.PSWizard.clear_row" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function clear row data in table</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>row</strong> (<em>int</em>) – row which clear</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.sub_pub_wizard.PSWizard.deleteClicked">
+<code class="descname">deleteClicked</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.sub_pub_wizard.PSWizard.deleteClicked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function delete row in table if button in row was pressed.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function defined as slot.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.sub_pub_wizard.PSWizard.initUI">
+<code class="descname">initUI</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.sub_pub_wizard.PSWizard.initUI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function initialisation of widget interface</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.sub_pub_wizard.PSWizard.make_param">
+<code class="descname">make_param</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.sub_pub_wizard.PSWizard.make_param" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function make subscribers and publishers list from table</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="gengui.sub_pub_wizard.PSWizard.msg2Statusbar">
+<code class="descname">msg2Statusbar</code><a class="headerlink" href="#gengui.sub_pub_wizard.PSWizard.msg2Statusbar" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="gengui.sub_pub_wizard.PSWizard.reload_table">
+<code class="descname">reload_table</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#gengui.sub_pub_wizard.PSWizard.reload_table" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function reload manager’s table from subscribers and publishers list</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="gengui.sub_pub_wizard.PSWizard.validate_row">
+<code class="descname">validate_row</code><span class="sig-paren">(</span><em>row</em><span class="sig-paren">)</span><a class="headerlink" href="#gengui.sub_pub_wizard.PSWizard.validate_row" title="Permalink to this definition">¶</a></dt>
+<dd><p>Function validate row data</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>row</strong> (<em>int</em>) – position row which validate</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-gengui">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-gengui" title="Permalink to this headline">¶</a></h2>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">RosGen</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Dmitriy Potapov.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.0.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/_modules/gengui.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
