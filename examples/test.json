@@ -12,8 +12,8 @@
   "node":
   {
     "name": "motor_driver_node",
-    "depend": [{"name": "nav_msgs","type":  "Odometry"}, {"name": "geometry_msgs","type":  "Twist"}, {"name": "tf","type":  "transform_broadcaster"}],
-    "subscribers": [{"name": "command_subscriber", "msg_type": "geometry_msgs::Twist", "topic_name": "/cmd_vel", "queue_size": 2}],
-    "publishers": [{"name": "odometry_publisher", "msg_type": "nav_msgs::Odometry", "topic_name": "/odom", "queue_size": 10}]
+    "depend": [{"name": "nav_msgs","type":  "Odometry"}, {"name": "geometry_msgs","type":  "Twist"}],
+    "subscribers": [{"name": "command_subscriber", "msg_type": "geometry_msgs/Twist", "topic_name": "/cmd_vel", "queue_size": "2"}],
+    "publishers": [{"name": "odometry_publisher", "msg_type": "nav_msgs/Odometry", "topic_name": "/odom", "queue_size": "10"}]
   }
 }

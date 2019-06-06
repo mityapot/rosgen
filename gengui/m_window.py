@@ -110,10 +110,9 @@ class RosGenWidget(QWidget):
         Function initialisation of widget interface
         """
 
-        lbl_names = ['Название проекта', 'Версия', 'Директория', 'Описание', 'Автор', 'Почта', 'Дополнительные зависимости', 'Название ноды']# , 'Зависимости ноды']
+        lbl_names = ['Название проекта', 'Версия', 'Директория', 'Описание', 'Автор', 'Почта', 'Дополнительные зависимости', 'Название ноды']
         param_list = ['motor_driver', '0.0.0', '/home/mitya/catkin_ws/src/', 'The motor_driver package', 'A. Kozov',
-                      'alexey@todo.todo', 'nav_msgs, geometry_msgs, tf, ', 'motor_driver_node',]
-                      # 'nav_msgs/Odometry, geometry_msgs/Twist, tf/transform_broadcaster, ']
+                      'alexey@todo.todo', 'nav_msgs, geometry_msgs, tf, ', 'motor_driver_node']
         labels = []
         for name in lbl_names:
             labels.append(QLabel(name))
@@ -158,7 +157,6 @@ class RosGenWidget(QWidget):
 
         param_list = []
         dep_str = ''
-        dep_node_str = ''
         sub_list = list()
         pub_list = list()
         tree = ET.ElementTree(file=xml_file)
@@ -183,8 +181,6 @@ class RosGenWidget(QWidget):
         for child in node:
             if child.tag == 'name':
                 param_list.insert(7, child.text)
-            # if child.tag == 'depend':
-            #     dep_node_str = dep_node_str + child.text + '/' + child.attrib['type'] + ', '
             if child.tag == 'subscribers':
                 for sub in child:
                     sub_dict = dict()
@@ -197,10 +193,6 @@ class RosGenWidget(QWidget):
                     for param in pub:
                         pub_dict[param.tag] = param.text
                     pub_list.append(pub_dict)
-        # param_list.insert(8, dep_node_str)
-        print(param_list)
-        print(sub_list)
-        print(pub_list)
         for line, val in zip(self.full_ed_lines, param_list):
             line.setText(val)
         self.manager.wid.pub_list = pub_list
@@ -231,9 +223,6 @@ class RosGenWidget(QWidget):
             dep_str = dep_str + dep + ', '
         push_param.append(dep_str)
         push_param.append(param_dict['node']['name'])
-        # for dep_node in param_dict['node']['depend']:
-        #     dep_node_str = dep_node_str + dep_node['name'] + '/' + dep_node['type'] + ', '
-        # push_param.append(dep_node_str)
         for line, val in zip(self.full_ed_lines, push_param):
             line.setText(val)
         self.manager.wid.pub_list = param_dict['node']['publishers']
@@ -259,17 +248,14 @@ class RosGenWidget(QWidget):
         dep_pkg = param_list[6].split(', ')
         if dep_pkg[len(dep_pkg) - 1] == '':
             dep_pkg.pop()
-        # dep_node = param_list[8].split(', ')
-        # dep_node.pop()
         for dep in self.manager.wid.sub_list:
             dep_node.append(dep['msg_type'])
         for dep in self.manager.wid.pub_list:
             dep_node.append(dep['msg_type'])
         for dep in dep_node:
-            a, b = dep.split('::')
+            a, b = dep.split('/')
             msg.append(a)
             msg_type.append(b)
-        print(param_list)
         f = open('../genkernel/templates/package_rosgen.xml')
         o = open(out_file, 'a')
         flag = 0
@@ -370,18 +356,13 @@ class RosGenWidget(QWidget):
         dep_pkg = inp_list[6].split(', ')
         if dep_pkg[len(dep_pkg) - 1] == '':
             dep_pkg.pop()
-        # dep_node = inp_list[8].split(', ')
-        # dep_node.pop()
         for dep in self.manager.wid.sub_list:
             dep_node.append(dep['msg_type'])
         for dep in self.manager.wid.pub_list:
             dep_node.append(dep['msg_type'])
         for dep in dep_node:
-            msg, msg_type = dep.split('::')
+            msg, msg_type = dep.split('/')
             dep_node_list.append({'name': msg, 'type': msg_type})
-        # for dep in dep_node:
-        #     msg, msg_type = dep.split('/')
-        #     dep_node_list.append({'name': msg, 'type': msg_type})
         for param, value in zip(param_list, inp_list):
             pkg_dict[param] = value
         pkg_dict['maintainer'] = {'name': inp_list[4], 'email':  inp_list[5]}
@@ -391,7 +372,6 @@ class RosGenWidget(QWidget):
         pkg_dict['node']['depend'] = dep_node_list
         pkg_dict['node']['subscribers'] = self.manager.wid.sub_list
         pkg_dict['node']['publishers'] = self.manager.wid.pub_list
-        print(pkg_dict)
         return pkg_dict
 
     def clear_all_lines(self):

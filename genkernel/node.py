@@ -88,7 +88,7 @@ class RosNode:
                     o.write('  ros::Publisher _{};\n'.format(publisher['name']))
                 o.write('\n')
                 for subscriber in self.subscribers:
-                    o.write('  void {}Callback(const {}& message);\n'.format(subscriber['name'].split('_')[0], subscriber['msg_type']))
+                    o.write('  void {}Callback(const {}& message);\n'.format(subscriber['name'].split('_')[0], subscriber['msg_type'].replace('/', '::')))
                 block_flag = -1
         o.close()
         f.close()
@@ -121,12 +121,12 @@ class RosNode:
                 sub_flag = -1
             if pub_flag == 1:
                 for publisher in self.publishers:
-                    o.write('  _{} = _node.advertise<{}>(\'{}\', {});\n'.format(publisher['name'], publisher['msg_type'], publisher['topic_name'], publisher['queue_size']))
+                    o.write('  _{} = _node.advertise<{}>(\'{}\', {});\n'.format(publisher['name'], publisher['msg_type'].replace('/', '::'), publisher['topic_name'], publisher['queue_size']))
                 pub_flag = -1
         f.close()
         o.write('\n')
         for subscriber in self.subscribers:
-            o.write('void {}::{}Callback(const {}& m) '.format(self.template_names['classname'], subscriber['name'].split('_')[0], subscriber['msg_type']))
+            o.write('void {}::{}Callback(const {}& m) '.format(self.template_names['classname'], subscriber['name'].split('_')[0], subscriber['msg_type'].replace('/', '::')))
             o.write('{\n}\n')
         o.close()
 

@@ -72,8 +72,6 @@ class ManagerGui(QMainWindow):
 
         if e.key() == Qt.Key_Escape:
             self.manager_close()
-        if e.key() == Qt.Key_Enter:
-            print('Enter')
 
     def closeEvent(self, QCloseEvent):
         """
@@ -179,7 +177,7 @@ class PSWizard(QWidget):
         :rtype: list, QComboBox
         """
 
-        p_holder_list = ["odometry_publisher", "nav_msgs::Odometry", "/odom", "10"]
+        p_holder_list = ["odometry_publisher", "nav_msgs/Odometry", "/odom", "10"]
         self.table.insertRow(rowPosition)
         ed_line_row = list()
         for column in range(1, self.table.columnCount() - 1):
@@ -241,8 +239,7 @@ class PSWizard(QWidget):
                     self.sub_list.append(row_dict)
             self.msg2Statusbar.emit('Изменения применены')
             self.changed = False
-            print(self.pub_list)
-            print(self.sub_list)
+
 
     def validate_row(self, row):
         """
@@ -267,7 +264,6 @@ class PSWizard(QWidget):
         """
 
         row = self.table.rowCount() - 1
-        print(row)
         if row >= 0:
             for line in range(1, self.table.columnCount() - 1):
                     if self.table.cellWidget(row, line).text() != "":
@@ -288,6 +284,7 @@ class PSWizard(QWidget):
         param_list = ['name', 'msg_type', 'topic_name', 'queue_size']
         for row in range(self.table.rowCount()):
             self.clear_row(row)
+        for row in range(self.table.rowCount()):
             self.table.removeRow(row)
         for i in range(len(self.pub_list)):
             ed_line_row, _ = self.add_row(i)

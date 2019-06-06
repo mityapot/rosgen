@@ -12,11 +12,10 @@
         <name>motor_driver_node</name>
         <depend type="Odometry">nav_msgs</depend>
         <depend type="Twist">geometry_msgs</depend>
-        <depend type="transform_broadcaster">tf</depend>
         <subscribers>
             <sub>
                 <name>command_subscriber</name>
-                <msg_type>geometry_msgs::Twist</msg_type>
+                <msg_type>geometry_msgs/Twist</msg_type>
                 <topic_name>/cmd_vel</topic_name>
                 <queue_size>2</queue_size>
             </sub>
@@ -24,7 +23,7 @@
         <publishers>
             <pub>
                 <name>odometry_publisher</name>
-                <msg_type>nav_msgs::Odometry</msg_type>
+                <msg_type>nav_msgs/Odometry</msg_type>
                 <topic_name>/odom</topic_name>
                 <queue_size>10</queue_size>
             </pub>
