@@ -111,8 +111,8 @@ class RosGenWidget(QWidget):
         """
 
         lbl_names = ['Название проекта', 'Версия', 'Директория', 'Описание', 'Автор', 'Почта', 'Дополнительные зависимости', 'Название ноды']
-        param_list = ['motor_driver', '0.0.0', '/home/mitya/catkin_ws/src/', 'The motor_driver package', 'A. Kozov',
-                      'alexey@todo.todo', 'nav_msgs, geometry_msgs, tf, ', 'motor_driver_node']
+        param_list = ['motor_driver', '0.0.0', '/home/mitya/catkin_ws/src/', 'The motor_driver package', 'D. Potapov',
+                      'potapov627@yandex.ru', 'nav_msgs, geometry_msgs, tf, ', 'motor_driver_node']
         labels = []
         for name in lbl_names:
             labels.append(QLabel(name))
